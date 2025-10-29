@@ -18,8 +18,7 @@
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
-    html::-webkit-scrollbar,
-    body::-webkit-scrollbar { display: none; }
+    html::-webkit-scrollbar, body::-webkit-scrollbar { display: none; }
 
     body { 
       font-family: 'Poppins', sans-serif; 
@@ -172,10 +171,19 @@ function showGames(category){
     .then(names=>{
       ul.innerHTML = '';
       names.forEach(name=>{
-        // 🔹 Tireli klasör yapısına göre doğru URL formatı:
-        const url = `https://xozgurcanx.github.io/games/${category}/${name}/`;
+        const lower = name.toLowerCase();
+        const upper = name.charAt(0).toUpperCase() + name.slice(1);
+        const urlLower = `https://xozgurcanx.github.io/games/${category}/${lower}/`;
+        const urlUpper = `https://xozgurcanx.github.io/games/${category}/${upper}/`;
+
         const li = document.createElement('li');
-        li.innerHTML = `<a href="${url}">${name.replace(/-/g,' ')}</a>`;
+        li.innerHTML = `
+          <a href="${urlLower}" 
+             onerror="this.href='${urlUpper}'"
+             style="display:block;background:rgba(255,255,255,0.05);
+             padding:10px;border-radius:8px;color:#f1f1f1;text-decoration:none;">
+             ${name.replace(/-/g,' ')}
+          </a>`;
         ul.appendChild(li);
       });
     })

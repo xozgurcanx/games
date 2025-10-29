@@ -1,10 +1,9 @@
 <script>
-  const path = window.location.pathname.toLowerCase();
-  const fixedUrl = "https://xozgurcanx.github.io" + path;
-  // Aynı klasör altındaki küçük harfli dosyayı yeniden yükle
-  if (path !== window.location.pathname) {
-    window.location.replace(fixedUrl);
+  const lower = window.location.pathname.toLowerCase();
+  const fixed = "https://xozgurcanx.github.io" + lower;
+  if (lower !== window.location.pathname) {
+    window.location.href = fixed;  // replace yerine href daha güvenli yönlendirir
   } else {
-    document.write("<h2>Oyun bulunamadı</h2>");
+    document.body.innerHTML = "<h2>Oyun bulunamadı</h2>";
   }
 </script>

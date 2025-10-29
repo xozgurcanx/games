@@ -1,0 +1,10 @@
+<script>
+  const path = window.location.pathname.toLowerCase();
+  const fixedUrl = "https://xozgurcanx.github.io" + path;
+  // Aynı klasör altındaki küçük harfli dosyayı yeniden yükle
+  if (path !== window.location.pathname) {
+    window.location.replace(fixedUrl);
+  } else {
+    document.write("<h2>Oyun bulunamadı</h2>");
+  }
+</script>

@@ -200,5 +200,73 @@ document.querySelectorAll('.cat-link').forEach(a=>{
 });
 </script>
 
+  <script>
+async function urlOk(url){
+  try{
+    const r = await fetch(url, {method:'HEAD', cache:'no-store'});
+    return r.ok;
+  }catch(e){ return false; }
+}
+
+function capFirst(s){ return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+function titleHyphen(s){ return s.split('-').map(capFirst).join('-'); }
+
+async function resolveGameUrl(category, name){
+  const base = `https://xozgurcanx.github.io/games/${category}`;
+  const nameLower = name.toLowerCase();
+  const candidates = [
+    name,                        // json'daki gibi
+    capFirst(nameLower),         // İlk harf büyük
+    titleHyphen(nameLower),      // Her-kelime-büyük
+    nameLower                    // tamamen küçük
+  ];
+
+  // 1) Klasör (index.html) varyasyonları
+  for (const v of candidates){
+    const dirUrl = `${base}/${v}/`;
+    if (await urlOk(dirUrl)) return dirUrl;
+  }
+  // 2) Aynı klasörde .swf dosyası varyasyonları
+  for (const v of candidates){
+    const swfUrl = `${base}/${v}/${v}.swf`;
+    if (await urlOk(swfUrl)) return swfUrl;
+  }
+  // 3) Son çare: json'daki isimle klasör
+  return `${base}/${name}/`;
+}
+
+async function showGames(category){
+  const list = document.getElementById('gameList');
+  const title = document.getElementById('gameTitle');
+  const ul = document.getElementById('gameItems');
+  title.textContent = category.toUpperCase() + ' GAMES';
+  ul.innerHTML = '<li>Loading...</li>';
+  list.style.display = 'block';
+  window.scrollTo({top:list.offsetTop, behavior:'smooth'});
+
+  try{
+    const names = await (await fetch(`/games/${category}/list.json`)).json();
+    ul.innerHTML = '';
+    for (const name of names){
+      const url = await resolveGameUrl(category, name);
+      const li = document.createElement('li');
+      li.innerHTML = `<a href="${url}" style="display:block;background:rgba(255,255,255,.05);padding:10px;border-radius:8px;color:#f1f1f1;text-decoration:none;">${name.replace(/-/g,' ')}</a>`;
+      ul.appendChild(li);
+    }
+  }catch(e){
+    ul.innerHTML = '<li>Liste yüklenemedi.</li>';
+  }
+}
+
+// Kategori tıklamaları
+document.querySelectorAll('.cat-link').forEach(a=>{
+  a.addEventListener('click', e=>{
+    e.preventDefault();
+    showGames(a.dataset.cat); // örn: "sport", "1-player"
+  });
+});
+</script>
+
 </body>
 </html>
+

@@ -155,22 +155,16 @@
       window.scrollTo({ top: list.offsetTop, behavior: "smooth" });
 
       try {
-        const res = await fetch(`/games/${category}/`);
-        const html = await res.text();
-        const matches = [...html.matchAll(/href="([^"]+)\.swf"/g)];
+        const res = await fetch(`/games/${category}/list.json`);
+        const games = await res.json();
         ul.innerHTML = "";
 
-        if (matches.length === 0) {
-          ul.innerHTML = "<li>No games found.</li>";
-        } else {
-          matches.forEach(m => {
-            const path = m[1].split('/').pop();
-            const name = path.replace(/-/g, ' ').replace(/_/g, ' ');
-            const li = document.createElement("li");
-            li.innerHTML = `<a href="/games/play/${category}/${path}.swf">${name}</a>`;
-            ul.appendChild(li);
-          });
-        }
+        games.forEach(name => {
+          const displayName = name.replace(/-/g, ' ');
+          const li = document.createElement("li");
+          li.innerHTML = `<a href="/games/play/${category}/${name}.swf">${displayName}</a>`;
+          ul.appendChild(li);
+        });
       } catch (e) {
         ul.innerHTML = "<li>Unable to load games.</li>";
       }

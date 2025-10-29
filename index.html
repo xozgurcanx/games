@@ -200,50 +200,8 @@ document.querySelectorAll('.cat-link').forEach(a=>{
 });
 </script>
 
-<script>
-async function urlOk(url){
-  try{
-    const r = await fetch(url, {method:'HEAD', cache:'no-store'});
-    return r.ok;
-  }catch(e){ return false; }
-}
-
-function capFirst(s){ return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
-function titleHyphen(s){ return s.split('-').map(capFirst).join('-'); }
-
-async function resolveFolder(category, name){
-  const base = `https://xozgurcanx.github.io/games/${category}`;
-  const lower = name.toLowerCase();
-  const options = [lower, capFirst(lower), titleHyphen(lower)];
-
-  for (const o of options){
-    const dir = `${base}/${o}/`;
-    if (await urlOk(dir)) return dir;
-  }
-  return `${base}/${name}/`; // son çare
-}
-
-async function showGames(category){
-  const ul = document.getElementById('gameItems');
-  ul.innerHTML = '<li>Loading...</li>';
-
-  try{
-    const names = await (await fetch(`/games/${category}/list.json`)).json();
-    ul.innerHTML = '';
-    for (const name of names){
-      const url = await resolveFolder(category, name);
-      const li = document.createElement('li');
-      li.innerHTML = `<a href="${url}" style="display:block;background:rgba(255,255,255,.05);padding:10px;border-radius:8px;color:#f1f1f1;text-decoration:none;">${name.replace(/-/g,' ')}</a>`;
-      ul.appendChild(li);
-    }
-  }catch(e){
-    ul.innerHTML = '<li>Liste yüklenemedi.</li>';
-  }
-}
-</script>
-
-
 </body>
 </html>
+
 
 

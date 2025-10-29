@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sheep Campaign | Unblocked Games</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+<style>
+  body {
+    background-color: #061828;
+    color: #f1f1f1;
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    overflow-x: hidden;
+  }
+  a { color: #fff; text-decoration: none; font-weight: 600; }
+  h1 {
+    font-weight: 700;
+    font-size: 48px;
+    background: linear-gradient(45deg, #25c070, #33b5fb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 40px 0 30px 0;
+  }
+  .btn {
+    display: inline-block;
+    padding: 16px 42px;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+    background: #2A8476;
+    border: 1px solid #247165;
+    border-radius: 6px;
+    transition: background 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+  .btn:hover { background: #319685; transform: translateY(-2px); }
+  #box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 960px;
+    height: 600px;
+    margin: 30px auto;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.05);
+    box-shadow: 0 3px 15px rgba(0,0,0,0.3);
+    overflow: hidden;
+    position: relative;
+  }
+</style>
+</head>
+<body>
+  <a href="/games/">‹ Home</a>
+  <h1>Sheep Campaign</h1>
+
+  <div id="box">
+    <button class="btn" id="playBtn">Play</button>
+  </div>
+  <button class="btn" onclick="openFullscreenWindow()">⛶ Fullscreen</button>
+
+<script>
+  const swfPath = "./sheep-campaign.swf";
+  const box = document.getElementById("box");
+  const playBtn = document.getElementById("playBtn");
+
+  playBtn.onclick = () => {
+    playBtn.remove();
+    const ruffle = window.RufflePlayer.newest();
+    const player = ruffle.createPlayer();
+    player.style.width = "960px";
+    player.style.height = "600px";
+    box.appendChild(player);
+    player.load(swfPath);
+  };
+
+  function openFullscreenWindow() {
+    const win = window.open("", "_blank", "fullscreen=1");
+    win.document.write(`
+      <!DOCTYPE html>
+      <html lang='en'>
+      <head>
+        <meta charset='UTF-8'>
+        <title>Sheep Campaign | Unblocked Games</title>
+        <script src='https://unpkg.com/@ruffle-rs/ruffle'><\/script>
+        <style>
+          html,body {margin:0;padding:0;overflow:hidden;background:#000;height:100%;}
+          #container {width:100%;height:100%;}
+        <\/style>
+      </head>
+      <body>
+        <div id='container'></div>
+        <script>
+          const r = window.RufflePlayer.newest();
+          const p = r.createPlayer();
+          p.style.width = '100%';
+          p.style.height = '100%';
+          document.getElementById('container').appendChild(p);
+          p.load('./sheep-campaign.swf');
+          document.documentElement.requestFullscreen();
+        <\/script>
+      </body>
+      </html>
+    `);
+    win.document.close();
+  }
+</script>
+</body>
+</html>

@@ -89,7 +89,7 @@
     }
 
     .game-card:hover { transform: translateY(-5px); }
-    .game-card h3 { font-size:20px; margin-bottom:8px; color:#fff; }
+    .game-card h3 { font-size:20px; margin-bottom:8px; color:#37cfff; }
     .game-card p { font-size:14px; color:#bbb; }
     .game-card a { text-decoration:none; color:inherit; }
 
@@ -199,9 +199,19 @@ document.querySelectorAll('.cat-link').forEach(a=>{
   });
 });
 </script>
+  
+<script>
+  const p = window.location.pathname;
+  const lower = p.toLowerCase();
+  if (p !== lower) {
+    window.location.replace(lower);
+  }
+</script>
 
+  
 </body>
 </html>
+
 
 
 

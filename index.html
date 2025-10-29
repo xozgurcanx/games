@@ -178,8 +178,7 @@ function showGames(category){
 
         const li = document.createElement('li');
         li.innerHTML = `
-          <a href="${urlLower}" 
-             onerror="this.href='${urlUpper}'"
+          <a href="${urlLower}" onclick="this.href='${urlUpper}'"
              style="display:block;background:rgba(255,255,255,0.05);
              padding:10px;border-radius:8px;color:#f1f1f1;text-decoration:none;">
              ${name.replace(/-/g,' ')}
@@ -199,19 +198,6 @@ document.querySelectorAll('.cat-link').forEach(a=>{
   });
 });
 </script>
-  
-<script>
-  const p = window.location.pathname;
-  const lower = p.toLowerCase();
-  if (p !== lower) {
-    window.location.replace(lower);
-  }
-</script>
 
-  
 </body>
 </html>
-
-
-
-

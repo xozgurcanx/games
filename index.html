@@ -18,15 +18,11 @@
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
-
     html::-webkit-scrollbar,
-    body::-webkit-scrollbar {
-      display: none;
-    }
+    body::-webkit-scrollbar { display: none; }
 
     body { 
       font-family: 'Poppins', sans-serif; 
-      font-weight: 400; 
       color: #f1f1f1; 
     }
 
@@ -75,11 +71,6 @@
       box-shadow: 0 3px 20px rgba(0,0,0,0.4);
     }
 
-    .home-wrapper--intro .home-intro--right img:hover {
-      transform: perspective(800px) rotateY(0deg) rotateX(0deg) scale(1);
-      opacity: 1;
-    }
-
     .games { 
       display:grid; 
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
@@ -87,7 +78,6 @@
       margin:40px auto; 
       width:100%; 
       padding:0 20px; 
-      box-sizing: border-box;
     }
 
     .game-card { 
@@ -104,18 +94,6 @@
     .game-card p { font-size:14px; color:#bbb; }
     .game-card a { text-decoration:none; color:inherit; }
 
-    .seo-text {
-      width:90%;
-      max-width:900px;
-      margin:60px auto;
-      line-height:1.7;
-      color:#ccc;
-    }
-
-    .seo-text h2 {
-      color:#33b5fb;
-    }
-
     footer {
       text-align:center;
       color:#aaa;
@@ -124,6 +102,10 @@
       border-top:1px solid rgba(255,255,255,0.1);
       margin-top:60px;
     }
+
+    #gameList ul { list-style:none; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px; }
+    #gameList li a { display:block; background:rgba(255,255,255,0.05); padding:10px; border-radius:8px; color:#f1f1f1; text-decoration:none; }
+    #gameList li a:hover { background:rgba(255,255,255,0.1); }
 
     @media(max-width:768px){
       .home-wrapper--intro { flex-direction:column; text-align:center; }
@@ -151,21 +133,21 @@
   <!-- CATEGORY CARDS -->
   <div class="games" id="categories">
     <div class="game-card"><a href="#" class="cat-link" data-cat="1-player"><h3>1 Player Games</h3></a><p>Play single-player classics and arcade challenges.</p></div>
-    <div class="game-card"><a href="#" class="cat-link" data-cat="2-player"><h3>2 Player Games</h3></a><p>Compete with a friend in local multiplayer fun.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="3-4-player"><h3>3-4 Player Games</h3></a><p>Compete with friends in multiplayer fun.</p></div>
     <div class="game-card"><a href="#" class="cat-link" data-cat="3d"><h3>3D Games</h3></a><p>Immersive 3D adventures and first-person challenges.</p></div>
-    <div class="game-card"><a href="#" class="cat-link" data-cat="action"><h3>Action Games</h3></a><p>Fast-paced fighting and platform Flash games.</p></div>
     <div class="game-card"><a href="#" class="cat-link" data-cat="adventure"><h3>Adventure Games</h3></a><p>Explore worlds and complete quests.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="classic"><h3>Classic Games</h3></a><p>Retro-style Flash classics.</p></div>
     <div class="game-card"><a href="#" class="cat-link" data-cat="fighting"><h3>Fighting Games</h3></a><p>Battle opponents and master combat skills.</p></div>
-    <div class="game-card"><a href="#" class="cat-link" data-cat="puzzle"><h3>Puzzle Games</h3></a><p>Sharpen your mind with tricky puzzles.</p></div>
-    <div class="game-card"><a href="#" class="cat-link" data-cat="racing"><h3>Racing Games</h3></a><p>Race, drift and drive across thrilling tracks.</p></div>
-    <div class="game-card"><a href="#" class="cat-link" data-cat="shooting"><h3>Shooting Games</h3></a><p>Aim, shoot and dominate classic Flash shooters.</p></div>
-    <div class="game-card"><a href="#" class="cat-link" data-cat="sport"><h3>Sport Games</h3></a><p>Play football, basketball and more — all free.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="kids"><h3>Kids Games</h3></a><p>Fun, colorful, and educational adventures.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="our"><h3>Our Games</h3></a><p>Special picks and favorites from the archive.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="racing"><h3>Racing Games</h3></a><p>Race, drift, and drive across thrilling tracks.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="sport"><h3>Sport Games</h3></a><p>Play football, basketball, and more — all free.</p></div>
   </div>
 
-  <!-- GAME LIST -->
+  <!-- GAME LIST (dynamic) -->
   <section id="gameList" style="display:none; width:90%; max-width:1000px; margin:40px auto;">
     <h2 id="gameTitle">Games</h2>
-    <ul id="gameItems" style="list-style:none; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px;"></ul>
+    <ul id="gameItems"></ul>
   </section>
 
   <!-- FOOTER -->
@@ -185,18 +167,21 @@ function showGames(category){
   list.style.display = 'block';
   window.scrollTo({top:list.offsetTop, behavior:'smooth'});
 
-  fetch(`https://xozgurcanx.github.io/games/${category}/list.json`)
+  fetch(`/games/${category}/list.json`)
     .then(r=>r.json())
     .then(names=>{
       ul.innerHTML = '';
       names.forEach(name=>{
+        // 🔹 Tireli klasör yapısına göre doğru URL formatı:
         const url = `https://xozgurcanx.github.io/games/${category}/${name}/`;
         const li = document.createElement('li');
-        li.innerHTML = `<a href="${url}" style="display:block;background:rgba(255,255,255,0.05);padding:10px;border-radius:8px;color:#f1f1f1;text-decoration:none;">${name.replace(/-/g,' ')}</a>`;
+        li.innerHTML = `<a href="${url}">${name.replace(/-/g,' ')}</a>`;
         ul.appendChild(li);
       });
     })
-    .catch(()=>{ ul.innerHTML = '<li>List could not be loaded.</li>'; });
+    .catch(()=>{
+      ul.innerHTML = '<li>Liste yüklenemedi.</li>';
+    });
 }
 
 document.querySelectorAll('.cat-link').forEach(a=>{

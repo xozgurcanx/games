@@ -170,18 +170,10 @@ function showGames(category){
     .then(names=>{
       ul.innerHTML = '';
       names.forEach(name=>{
-        const lower = name.toLowerCase();
-        const upper = name.charAt(0).toUpperCase() + name.slice(1);
-
-        const url1 = `https://xozgurcanx.github.io/games/${category}/${lower}/`;
-        const url2 = `https://xozgurcanx.github.io/games/${category}/${upper}/`;
-
+        const url = `https://xozgurcanx.github.io/games/${category}/${name}/`;
         const li = document.createElement('li');
         li.innerHTML = `
-          <a href="${url1}"
-             onclick="event.preventDefault();fetch('${url1}')
-               .then(r=>{if(r.ok){window.location.href='${url1}';}
-               else{window.location.href='${url2}';}})"
+          <a href="${url}" target="_blank"
              style="display:block;background:rgba(255,255,255,0.05);
              padding:10px;border-radius:8px;color:#f1f1f1;text-decoration:none;">
              ${name.replace(/-/g,' ')}
@@ -202,8 +194,10 @@ document.querySelectorAll('.cat-link').forEach(a=>{
 });
 </script>
 
+
 </body>
 </html>
+
 
 
 

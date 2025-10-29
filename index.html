@@ -155,7 +155,6 @@
   </footer>
 
 </div>
-
 <script>
 function showGames(category){
   const list = document.getElementById('gameList');
@@ -171,18 +170,17 @@ function showGames(category){
     .then(names=>{
       ul.innerHTML = '';
       names.forEach(name=>{
-        const proper = name.charAt(0).toUpperCase() + name.slice(1);
         const lower = name.toLowerCase();
-        const urls = [
-          `https://xozgurcanx.github.io/games/${category}/${name}/`,
-          `https://xozgurcanx.github.io/games/${category}/${lower}/`,
-          `https://xozgurcanx.github.io/games/${category}/${proper}/`
-        ];
+        const upper = name.charAt(0).toUpperCase() + name.slice(1);
+
+        // önce küçük harfli, sonra büyük harfli klasörü dener
+        const url1 = `https://xozgurcanx.github.io/games/${category}/${lower}/`;
+        const url2 = `https://xozgurcanx.github.io/games/${category}/${upper}/`;
 
         const li = document.createElement('li');
         li.innerHTML = `
-          <a href="${urls[0]}" 
-             onclick="fetch(this.href).then(r=>{if(r.status===404)this.href='${urls[1]}';return r}).then(r=>{if(r.status===404)this.href='${urls[2]}';})"
+          <a href="${url1}" target="_blank"
+             onclick="fetch('${url1}').then(r=>{if(r.status===404)window.location.href='${url2}';})"
              style="display:block;background:rgba(255,255,255,0.05);
              padding:10px;border-radius:8px;color:#f1f1f1;text-decoration:none;">
              ${name.replace(/-/g,' ')}
@@ -194,9 +192,18 @@ function showGames(category){
       ul.innerHTML = '<li>Liste yüklenemedi.</li>';
     });
 }
+
+document.querySelectorAll('.cat-link').forEach(a=>{
+  a.addEventListener('click', e=>{
+    e.preventDefault();
+    showGames(a.dataset.cat);
+  });
+});
 </script>
+
 
 
 </body>
 </html>
+
 

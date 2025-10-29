@@ -140,7 +140,7 @@
     <div class="home-intro--left">
       <h1>Unblocked Games</h1>
       <h2>Play 2000+ Free Browser Games Online</h2>
-<a href="https://sites.google.com/site/fastunblockedgames99/" class="button button--large button--cta">Fast Unblocked Games 99</a>
+      <a href="https://sites.google.com/site/fastunblockedgames99/" class="button button--large button--cta">Fast Unblocked Games 99</a>
     </div>
     <div class="home-intro--right">
       <img src="https://petinya.org/z/github-xozgurcanx-games/unblocked-games.webp" alt="Unblocked Flash Games">
@@ -150,33 +150,23 @@
 
   <!-- CATEGORY CARDS -->
   <div class="games" id="categories">
-
-    <div class="game-card"><a href="1-player/"><h3>1 Player Games</h3></a><p>Play single-player classics and arcade challenges.</p></div>
-    <div class="game-card"><a href="2-player/"><h3>2 Player Games</h3></a><p>Compete with a friend in local multiplayer fun.</p></div>
-    <div class="game-card"><a href="3d/"><h3>3D Games</h3></a><p>Immersive 3D adventures and first-person challenges.</p></div>
-    <div class="game-card"><a href="action/"><h3>Action Games</h3></a><p>Fast-paced fighting and platform Flash games.</p></div>
-    <div class="game-card"><a href="adventure/"><h3>Adventure Games</h3></a><p>Explore worlds and complete quests.</p></div>
-    <div class="game-card"><a href="fighting/"><h3>Fighting Games</h3></a><p>Battle opponents and master combat skills.</p></div>
-    <div class="game-card"><a href="puzzle/"><h3>Puzzle Games</h3></a><p>Sharpen your mind with tricky puzzles.</p></div>
-    <div class="game-card"><a href="racing/"><h3>Racing Games</h3></a><p>Race, drift and drive across thrilling tracks.</p></div>
-    <div class="game-card"><a href="shooting/"><h3>Shooting Games</h3></a><p>Aim, shoot and dominate classic Flash shooters.</p></div>
-    <div class="game-card"><a href="sport/"><h3>Sport Games</h3></a><p>Play football, basketball and more — all free.</p></div>
-
+    <div class="game-card"><a href="#" class="cat-link" data-cat="1-player"><h3>1 Player Games</h3></a><p>Play single-player classics and arcade challenges.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="2-player"><h3>2 Player Games</h3></a><p>Compete with a friend in local multiplayer fun.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="3d"><h3>3D Games</h3></a><p>Immersive 3D adventures and first-person challenges.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="action"><h3>Action Games</h3></a><p>Fast-paced fighting and platform Flash games.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="adventure"><h3>Adventure Games</h3></a><p>Explore worlds and complete quests.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="fighting"><h3>Fighting Games</h3></a><p>Battle opponents and master combat skills.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="puzzle"><h3>Puzzle Games</h3></a><p>Sharpen your mind with tricky puzzles.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="racing"><h3>Racing Games</h3></a><p>Race, drift and drive across thrilling tracks.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="shooting"><h3>Shooting Games</h3></a><p>Aim, shoot and dominate classic Flash shooters.</p></div>
+    <div class="game-card"><a href="#" class="cat-link" data-cat="sport"><h3>Sport Games</h3></a><p>Play football, basketball and more — all free.</p></div>
   </div>
-  <!-- /CATEGORY CARDS -->
 
-  <!-- SEO TEXT -->
-  <div class="seo-text">
-    <h2>Why Play Unblocked Games?</h2>
-    <p>
-      Unblocked Flash games bring back thousands of nostalgic browser experiences directly to your screen. 
-      From racing and shooting to puzzle and adventure, every category is free and easy to play.
-    </p>
-    <p>
-      Choose a category above to explore hundreds of playable games without installation. 
-      Enjoy smooth performance, instant loading, and unlimited fun at school or work.
-    </p>
-  </div>
+  <!-- GAME LIST -->
+  <section id="gameList" style="display:none; width:90%; max-width:1000px; margin:40px auto;">
+    <h2 id="gameTitle">Games</h2>
+    <ul id="gameItems" style="list-style:none; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:10px;"></ul>
+  </section>
 
   <!-- FOOTER -->
   <footer>
@@ -184,6 +174,38 @@
   </footer>
 
 </div>
+
+<script>
+function showGames(category){
+  const list = document.getElementById('gameList');
+  const title = document.getElementById('gameTitle');
+  const ul = document.getElementById('gameItems');
+  title.textContent = category.toUpperCase() + ' GAMES';
+  ul.innerHTML = '<li>Loading...</li>';
+  list.style.display = 'block';
+  window.scrollTo({top:list.offsetTop, behavior:'smooth'});
+
+  fetch(`https://xozgurcanx.github.io/games/${category}/list.json`)
+    .then(r=>r.json())
+    .then(names=>{
+      ul.innerHTML = '';
+      names.forEach(name=>{
+        const url = `https://xozgurcanx.github.io/games/${category}/${name}/`;
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="${url}" style="display:block;background:rgba(255,255,255,0.05);padding:10px;border-radius:8px;color:#f1f1f1;text-decoration:none;">${name.replace(/-/g,' ')}</a>`;
+        ul.appendChild(li);
+      });
+    })
+    .catch(()=>{ ul.innerHTML = '<li>List could not be loaded.</li>'; });
+}
+
+document.querySelectorAll('.cat-link').forEach(a=>{
+  a.addEventListener('click', e=>{
+    e.preventDefault();
+    showGames(a.dataset.cat);
+  });
+});
+</script>
 
 </body>
 </html>

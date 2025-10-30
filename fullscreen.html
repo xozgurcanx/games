@@ -19,6 +19,12 @@
     document.body.appendChild(p);
     p.load(game);
     document.documentElement.requestFullscreen();
+
+    // URL'deki ?src=... kısmını sil
+    if (window.history.replaceState) {
+      const clean = window.location.origin + window.location.pathname;
+      window.history.replaceState({}, document.title, clean);
+    }
   </script>
 </body>
 </html>

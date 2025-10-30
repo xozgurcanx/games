@@ -62,7 +62,7 @@
     .home-wrapper--intro .home-intro--right img {
       width: 80%;
       position: relative;
-      top: -30px;
+      top: -1px;
       transform: perspective(800px) rotateY(25deg) scale(.9) rotateX(10deg);
       opacity: 0.9;
       transition: .6s ease all;
@@ -110,13 +110,125 @@
       .home-wrapper--intro { flex-direction:column; text-align:center; }
       .home-intro--right { text-align:center; }
     }
+  body {
+    margin: 0;
+    background-color: #010e1b;
+    font-family: 'Segoe UI','Helvetica Neue',Helvetica,Roboto,Oxygen,Ubuntu,Cantarell,'Fira Sans','Droid Sans',sans-serif;
+  }
+
+header {
+  background-color: #03101e;
+  border-bottom: 1px solid #061b2c;
+  padding: 33px 0;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 24px;
+    font-weight: 700;
+color: #9bc7c0;
+    letter-spacing: -0.5px;
+  }
+
+  .logo span {
+    color: #9bc7c0;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    margin: 0;
+    padding: 0;
+  }
+
+  nav a {
+    text-decoration: none;
+    font-size: 19px;
+    font-weight: 400;
+    color: #fff;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  nav a::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #3ad4b3;
+    transition: width 0.3s ease;
+  }
+
+  nav a:hover::after {
+    width: 100%;
+  }
+
+  .search {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+  }
+
+  .search::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+  }
+
+  .search::after {
+    content: "";
+    position: absolute;
+    bottom: 4px;
+    right: 2px;
+    width: 12px;
+    height: 2px;
+    background-color: #fff;
+    transform: rotate(45deg);
+    transform-origin: left center;
+  }
   </style>
 </head>
 <body>
 
+<header>
+
+  <div class="container">
+  <!-- HEADER -->
+    <div class="logo">Unblocked<span> Games</span></div>
+    <nav>
+      <ul>
+        <li><a href="https://xozgurcanx.github.io/games/">Home</a></li>
+        <li><a href="https://xozgurcanx.github.io/games/contact.html">Contact</a></li>
+        <li><a href="https://xozgurcanx.github.io/games/privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="https://xozgurcanx.github.io/games/terms-of-service">Terms of Service</a></li>
+        <li><a href="https://xozgurcanx.github.io/games/dmca.html">DMCA</a></li>
+        <li><a href="https://xozgurcanx.github.io/games/sitemap.xml">Sitemap</a></li>
+      </ul>
+    </nav>
+    <div class="search"></div>
+  </div>
+</header>
+
 <div class="page-container">
 
-  <!-- HEADER -->
   <div class="home-wrapper--intro">
     <div class="home-intro--left">
       <h1>Unblocked Games</h1>
@@ -193,18 +305,6 @@ document.querySelectorAll('.cat-link').forEach(a=>{
   });
 });
 </script>
-  
-  <iframe src="https://xozgurcanx.github.io/games/ad-template.html" style="display:none;"></iframe>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-

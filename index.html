@@ -194,9 +194,29 @@ document.querySelectorAll('.cat-link').forEach(a=>{
 });
 </script>
 
+  <!-- Global Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NH5MQ0Q6GN"></script>
+<script>
+(function(){
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NH5MQ0Q6GN', { 'send_page_view': true });
+
+  // Alt klasör veya oyun sayfası da açılsa çalışsın
+  if (window.location.pathname !== '/') {
+    gtag('event', 'page_view', {
+      page_path: window.location.pathname,
+      page_title: document.title
+    });
+  }
+})();
+</script>
+
 
 </body>
 </html>
+
 
 
 

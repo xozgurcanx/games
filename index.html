@@ -194,7 +194,8 @@ document.querySelectorAll('.cat-link').forEach(a=>{
 });
 </script>
 
-  <!-- Global Google Analytics (GA4) -->
+<!-- 🔹 Google Analytics + Sabit Sağ/Sol Reklamlar (Tüm Site İçin) -->
+<!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-NH5MQ0Q6GN"></script>
 <script>
 (function(){
@@ -203,32 +204,34 @@ document.querySelectorAll('.cat-link').forEach(a=>{
   gtag('js', new Date());
   gtag('config', 'G-NH5MQ0Q6GN', { 'send_page_view': true });
 
-  // Alt klasör veya oyun sayfası da açılsa çalışsın
-  if (window.location.pathname !== '/') {
-    gtag('event', 'page_view', {
-      page_path: window.location.pathname,
-      page_title: document.title
-    });
-  }
+  // Her oyun veya alt sayfa için ayrı görüntüleme kaydı
+  gtag('event', 'page_view', {
+    page_path: window.location.pathname,
+    page_title: document.title
+  });
 })();
 </script>
 
-
-
-
-  <!-- Sabit Sağ ve Sol Reklam Alanları (sadece masaüstü) -->
+<!-- Sabit Sağ ve Sol Reklamlar -->
 <style>
   .ad-fixed {
     position: fixed;
     top: 50%;
     transform: translateY(-50%);
-    width: 160px;
+    width: 300px;
     height: 600px;
     z-index: 9999;
     border: none;
   }
-  .ad-left { left: 10px; }
-  .ad-right { right: 10px; }
+
+  .ad-left { left: 25px; }
+  .ad-right { right: 25px; }
+
+  @media(max-width:1400px){
+    .ad-left { left: 10px; }
+    .ad-right { right: 10px; }
+  }
+
   @media(max-width:1200px){
     .ad-fixed { display:none; }
   }
@@ -244,6 +247,7 @@ document.querySelectorAll('.cat-link').forEach(a=>{
 
 </body>
 </html>
+
 
 
 

@@ -194,59 +194,12 @@ document.querySelectorAll('.cat-link').forEach(a=>{
 });
 </script>
 
-<!-- 🔹 Google Analytics + Sabit Sağ/Sol Reklamlar (Tüm Site İçin) -->
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-NH5MQ0Q6GN"></script>
-<script>
-(function(){
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-NH5MQ0Q6GN', { 'send_page_view': true });
+<iframe src="https://xozgurcanx.github.io/analytics-ads.html" style="display:none;"></iframe>
 
-  // Her oyun veya alt sayfa için ayrı görüntüleme kaydı
-  gtag('event', 'page_view', {
-    page_path: window.location.pathname,
-    page_title: document.title
-  });
-})();
-</script>
-
-<!-- Sabit Sağ ve Sol Reklamlar -->
-<style>
-  .ad-fixed {
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 300px;
-    height: 600px;
-    z-index: 9999;
-    border: none;
-  }
-
-  .ad-left { left: 25px; }
-  .ad-right { right: 25px; }
-
-  @media(max-width:1400px){
-    .ad-left { left: 10px; }
-    .ad-right { right: 10px; }
-  }
-
-  @media(max-width:1200px){
-    .ad-fixed { display:none; }
-  }
-</style>
-
-<iframe class="ad-fixed ad-left"
-  src="https://script.google.com/macros/s/AKfycbxcyLvAmFJl9ro4ozo2YWHRFM4Ipti51Jbnv9X72ypsnPqronykHOFNXZcuKXfjJtUoDw/exec"
-  loading="lazy"></iframe>
-
-<iframe class="ad-fixed ad-right"
-  src="https://script.google.com/macros/s/AKfycbxcyLvAmFJl9ro4ozo2YWHRFM4Ipti51Jbnv9X72ypsnPqronykHOFNXZcuKXfjJtUoDw/exec"
-  loading="lazy"></iframe>
 
 </body>
 </html>
+
 
 
 

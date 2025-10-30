@@ -1,7 +1,8 @@
 const playBtn = document.getElementById("playBtn");
 const box = document.getElementById("iframe-container");
 const fsBtn = document.getElementById("fsBtn");
-let GAME_URL = ""; // set below if needed
+
+let GAME_URL = document.currentScript.getAttribute("data-game"); // gets from script tag
 
 playBtn.onclick = () => {
   playBtn.style.display = "none";
@@ -21,7 +22,3 @@ fsBtn.onclick = () => {
     encodeURIComponent(GAME_URL);
   window.open(url, "_blank");
 };
-
-// ↓ set game URL dynamically if desired
-GAME_URL =
-  "https://xozgurcanx.github.io/games/racing/2-players-madness/2-players-madness.swf";

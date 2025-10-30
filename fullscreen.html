@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Fullscreen Game</title>
+  <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
+  <style>
+    html,body{margin:0;padding:0;background:#000;height:100%;overflow:hidden;}
+    ruffle-player{width:100%;height:100%;display:block;}
+  </style>
+</head>
+<body>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const game = params.get("src");
+    const r = window.RufflePlayer.newest();
+    const p = r.createPlayer();
+    document.body.appendChild(p);
+    p.load(game);
+    document.documentElement.requestFullscreen();
+  </script>
+</body>
+</html>

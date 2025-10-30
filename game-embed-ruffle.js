@@ -2,7 +2,7 @@ const playBtn = document.getElementById("playBtn");
 const box = document.getElementById("iframe-container");
 const fsBtn = document.getElementById("fsBtn");
 
-let GAME_URL = document.currentScript.getAttribute("data-game"); // gets from script tag
+const GAME_URL = document.currentScript.getAttribute("data-game");
 
 playBtn.onclick = () => {
   playBtn.style.display = "none";

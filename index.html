@@ -214,8 +214,37 @@ document.querySelectorAll('.cat-link').forEach(a=>{
 </script>
 
 
+
+
+  <!-- Sabit Sağ ve Sol Reklam Alanları (sadece masaüstü) -->
+<style>
+  .ad-fixed {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 160px;
+    height: 600px;
+    z-index: 9999;
+    border: none;
+  }
+  .ad-left { left: 10px; }
+  .ad-right { right: 10px; }
+  @media(max-width:1200px){
+    .ad-fixed { display:none; }
+  }
+</style>
+
+<iframe class="ad-fixed ad-left"
+  src="https://script.google.com/macros/s/AKfycbxcyLvAmFJl9ro4ozo2YWHRFM4Ipti51Jbnv9X72ypsnPqronykHOFNXZcuKXfjJtUoDw/exec"
+  loading="lazy"></iframe>
+
+<iframe class="ad-fixed ad-right"
+  src="https://script.google.com/macros/s/AKfycbxcyLvAmFJl9ro4ozo2YWHRFM4Ipti51Jbnv9X72ypsnPqronykHOFNXZcuKXfjJtUoDw/exec"
+  loading="lazy"></iframe>
+
 </body>
 </html>
+
 
 
 

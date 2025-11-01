@@ -1,0 +1,4 @@
+echo "" > .nojekyll
+git add .nojekyll
+git commit -m "Fix sitemap serving on GitHub Pages"
+git push

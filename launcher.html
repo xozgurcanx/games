@@ -11,10 +11,7 @@ html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:Arial
 #bar{position:absolute;left:0;right:0;bottom:0;height:40px;display:flex;align-items:center;justify-content:center;color:#fff;background:rgba(0,0,0,.6);font:700 16px Arial}
 #skip{display:none;cursor:pointer;background:#fff;color:#000;padding:4px 12px;border-radius:6px}
 #small{display:none;font-size:13px}
-#game{position:fixed;inset:0;display:none}
 </style>
-
-<script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
 </head>
 <body>
 
@@ -29,19 +26,17 @@ html,body{margin:0;height:100%;background:#000;overflow:hidden;font-family:Arial
   </div>
 </div>
 
-<div id="game"></div>
-
 <script>
 const AD_URL="https://petinya.org/dikey.html";
-const swf=new URLSearchParams(location.search).get("swf");
-if(!swf){ main.textContent="NO SWF"; throw 0; }
+const url=new URLSearchParams(location.search).get("url");
+if(!url){ main.textContent="NO URL"; throw 0; }
 
 let t1,t2,done=false;
 
 window.onload=()=>{
   adf.src=AD_URL;
   start();
-  skip.onclick=play;
+  skip.onclick=go;
 };
 
 function start(){
@@ -52,16 +47,12 @@ function phase2(){
   main.style.display="none";
   skip.style.display=small.style.display="inline";
   let s=10; num.textContent=s;
-  t2=setInterval(()=>{ num.textContent=--s; if(s<=0){clearInterval(t2);play();}},1000);
+  t2=setInterval(()=>{ num.textContent=--s; if(s<=0){clearInterval(t2);go();}},1000);
 }
-function play(){
+function go(){
   if(done) return; done=true;
   clearInterval(t1); clearInterval(t2);
-  ad.style.display="none"; game.style.display="block";
-  const p=RufflePlayer.newest().createPlayer();
-  game.innerHTML=""; game.appendChild(p);
-  p.style.width="100%"; p.style.height="100%";
-  p.load(swf);
+  location.href=url;
 }
 </script>
 </body>
